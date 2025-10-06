@@ -2,31 +2,37 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Калькулятор заказа</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
 </head>
 
 <body>
-    <h1>Калькулятор стоимости заказа</h1>
+    <main class="container">
+        <h1>Калькулятор стоимости заказа</h1>
 
-    <form id="order-form">
-        <label for="product">Выберите товар:</label>
-        <select id="product" name="product" required>
-            <option value="1000">Ноутбук — 1000 ₽</option>
-            <option value="500">Наушники — 500 ₽</option>
-            <option value="200">Мышь — 200 ₽</option>
-        </select>
+        <form id="order-form" novalidate>
+            <div class="form-group">
+                <label for="product">Выберите товар</label>
+                <select id="product" required>
+                    <option value="1000">Ноутбук — 1000 ₽</option>
+                    <option value="500">Наушники — 500 ₽</option>
+                    <option value="200">Мышь — 200 ₽</option>
+                </select>
+            </div>
 
-        <label for="quantity">Количество:</label>
-        <input type="text" id="quantity" name="quantity" placeholder="Введите количество" required>
+            <div class="form-group">
+                <label for="quantity">Количество</label>
+                <input type="text" id="quantity" placeholder="Введите количество" required />
+            </div>
 
-        <button type="submit">Рассчитать</button>
-    </form>
+            <button type="submit" class="btn">Рассчитать стоимость</button>
+        </form>
 
-    <p id="result"></p>
+        <div id="result" class="result"></div>
+    </main>
 </body>
 
 </html>

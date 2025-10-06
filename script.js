@@ -1,26 +1,25 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("order-form");
-  const quantityInput = document.getElementById("quantity");
-  const productSelect = document.getElementById("product");
+  const product = document.getElementById("product");
+  const quantity = document.getElementById("quantity");
   const result = document.getElementById("result");
 
-  form.addEventListener("submit", function (event) {
+  form.addEventListener("submit", (event) => {
     event.preventDefault();
+    result.classList.remove("error");
 
-    const quantity = quantityInput.value.trim();
-    const regex = /^[0-9]+$/;
+    const qty = quantity.value.trim();
+    const regex = /^[1-9][0-9]*$/;
 
-    // Проверка корректности ввода
-    if (!regex.test(quantity)) {
-      result.textContent = "Ошибка: введите только целое число!";
-      result.style.color = "red";
+    if (!regex.test(qty)) {
+      result.textContent = "Ошибка: введите целое положительное число.";
+      result.classList.add("error");
       return;
     }
 
-    const price = parseFloat(productSelect.value);
-    const total = price * parseInt(quantity, 10);
+    const total = parseFloat(product.value) * parseInt(qty, 10);
+    const formatted = total.toLocaleString("ru-RU");
 
-    result.style.color = "black";
-    result.textContent = `Стоимость заказа: ${total} ₽`;
+    result.innerHTML = `Стоимость заказа: <span class="price">${formatted} ₽</span>`;
   });
 });
