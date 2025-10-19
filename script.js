@@ -1,25 +1,48 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("order-form");
-  const product = document.getElementById("product");
   const quantity = document.getElementById("quantity");
+  const radios = document.querySelectorAll('input[name="type"]');
+  const optionGroup = document.getElementById("option-group");
+  const propertyGroup = document.getElementById("property-group");
+  const option = document.getElementById("option");
+  const extra = document.getElementById("extra");
   const result = document.getElementById("result");
 
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    result.classList.remove("error");
+  const basePrices = {
+    basic: 500,
+    option: 800,
+    property: 1000,
+  };
 
-    const qty = quantity.value.trim();
-    const regex = /^[1-9][0-9]*$/;
+  function updateVisibility(type) {
+    optionGroup.classList.toggle("hidden", type !== "option");
+    propertyGroup.classList.toggle("hidden", type !== "property");
+  }
 
-    if (!regex.test(qty)) {
-      result.textContent = "Ошибка: введите целое положительное число.";
-      result.classList.add("error");
-      return;
-    }
+  function calculate() {
+    const qty = parseInt(quantity.value, 10) || 0;
+    const type = document.querySelector('input[name="type"]:checked').value;
 
-    const total = parseFloat(product.value) * parseInt(qty, 10);
-    const formatted = total.toLocaleString("ru-RU");
+    let total = basePrices[type] * qty;
 
-    result.innerHTML = `Стоимость заказа: <span class="price">${formatted} ₽</span>`;
-  });
+    if (type === "option") total *= parseFloat(option.value);
+    if (type === "property" && extra.checked) total *= parseFloat(extra.value);
+
+    result.innerHTML = `Стоимость: <span class="price">${total.toLocaleString(
+      "ru-RU"
+    )} ₽</span>`;
+  }
+
+  quantity.addEventListener("input", calculate);
+  radios.forEach((r) =>
+    r.addEventListener("change", (e) => {
+      updateVisibility(e.target.value);
+      calculate();
+    })
+  );
+  option.addEventListener("change", calculate);
+  extra.addEventListener("change", calculate);
+
+  // Инициализация
+  updateVisibility("basic");
+  calculate();
 });

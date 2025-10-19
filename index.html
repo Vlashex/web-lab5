@@ -4,34 +4,45 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Калькулятор заказа</title>
+    <title>Калькулятор стоимости услуги</title>
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
 </head>
 
 <body>
     <main class="container">
-        <h1>Калькулятор стоимости заказа</h1>
+        <h1>Калькулятор стоимости услуги</h1>
 
-        <form id="order-form" novalidate>
+        <form id="calc-form">
             <div class="form-group">
-                <label for="product">Выберите товар</label>
-                <select id="product" required>
-                    <option value="1000">Ноутбук — 1000 ₽</option>
-                    <option value="500">Наушники — 500 ₽</option>
-                    <option value="200">Мышь — 200 ₽</option>
+                <label>Количество</label>
+                <input type="number" id="quantity" min="1" value="1" required />
+            </div>
+
+            <div class="form-group">
+                <label>Тип услуги</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="type" value="basic" checked /> Базовая — 500 ₽</label>
+                    <label><input type="radio" name="type" value="option" /> С опцией — 800 ₽</label>
+                    <label><input type="radio" name="type" value="property" /> Со свойством — 1000 ₽</label>
+                </div>
+            </div>
+
+            <div id="option-group" class="form-group hidden">
+                <label>Выберите опцию</label>
+                <select id="option">
+                    <option value="1">Стандартная</option>
+                    <option value="1.2">Расширенная (+20%)</option>
+                    <option value="1.5">Премиум (+50%)</option>
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="quantity">Количество</label>
-                <input type="text" id="quantity" placeholder="Введите количество" required />
+            <div id="property-group" class="form-group hidden">
+                <label><input type="checkbox" id="extra" value="1.3" /> Добавить ускорение (+30%)</label>
             </div>
-
-            <button type="submit" class="btn">Рассчитать стоимость</button>
         </form>
 
-        <div id="result" class="result"></div>
+        <div id="result" class="result">Стоимость: <span class="price">0 ₽</span></div>
     </main>
 </body>
 
