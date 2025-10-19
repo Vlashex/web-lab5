@@ -2,10 +2,10 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Калькулятор стоимости услуги</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 
@@ -16,15 +16,15 @@
         <form id="calc-form">
             <div class="form-group">
                 <label>Количество</label>
-                <input type="number" id="quantity" min="1" value="1" required />
+                <input type="number" id="quantity" min="1" value="1" required>
             </div>
 
             <div class="form-group">
                 <label>Тип услуги</label>
                 <div class="radio-group">
-                    <label><input type="radio" name="type" value="basic" checked /> Базовая — 500 ₽</label>
-                    <label><input type="radio" name="type" value="option" /> С опцией — 800 ₽</label>
-                    <label><input type="radio" name="type" value="property" /> Со свойством — 1000 ₽</label>
+                    <label><input type="radio" name="type" value="basic" checked> Базовая — 500 ₽</label>
+                    <label><input type="radio" name="type" value="option"> С опцией — 800 ₽</label>
+                    <label><input type="radio" name="type" value="property"> Со свойством — 1000 ₽</label>
                 </div>
             </div>
 
@@ -38,7 +38,7 @@
             </div>
 
             <div id="property-group" class="form-group hidden">
-                <label><input type="checkbox" id="extra" value="1.3" /> Добавить ускорение (+30%)</label>
+                <label><input type="checkbox" id="extra" value="1.3"> Добавить ускорение (+30%)</label>
             </div>
         </form>
 
