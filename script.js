@@ -1,4 +1,7 @@
-document.addEventListener("DOMContentLoaded", () => {
+/*jslint browser:true, devel:true, long:true */
+
+document.addEventListener("DOMContentLoaded", function () {
+  "use strict";
   const quantity = document.getElementById("quantity");
   const radios = document.querySelectorAll('input[name="type"]');
   const optionGroup = document.getElementById("option-group");
@@ -21,28 +24,34 @@ document.addEventListener("DOMContentLoaded", () => {
   function calculate() {
     const qty = parseInt(quantity.value, 10) || 0;
     const type = document.querySelector('input[name="type"]:checked').value;
-
     let total = basePrices[type] * qty;
 
-    if (type === "option") total *= parseFloat(option.value);
-    if (type === "property" && extra.checked) total *= parseFloat(extra.value);
+    if (type === "option") {
+      total *= parseFloat(option.value);
+    }
 
-    result.innerHTML = `Стоимость: <span class="price">${total.toLocaleString(
-      "ru-RU"
-    )} ₽</span>`;
+    if (type === "property" && extra.checked) {
+      total *= parseFloat(extra.value);
+    }
+
+    result.innerHTML =
+      'Стоимость: <span class="price">' +
+      total.toLocaleString("ru-RU") +
+      " ₽" +
+      "</span>";
   }
 
   quantity.addEventListener("input", calculate);
-  radios.forEach((r) =>
-    r.addEventListener("change", (e) => {
+  radios.forEach(function (r) {
+    r.addEventListener("change", function (e) {
       updateVisibility(e.target.value);
       calculate();
-    })
-  );
+    });
+  });
+
   option.addEventListener("change", calculate);
   extra.addEventListener("change", calculate);
 
-  // Инициализация
   updateVisibility("basic");
   calculate();
 });
